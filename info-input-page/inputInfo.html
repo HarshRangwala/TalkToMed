@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <title>TalkToMed</title>
+</head>
+<body>
+    <div>
+        <h2>Update info</h2>
+        <ul>
+            <li>
+                Glucose reading: 
+                <input id="glucose-input">
+                <select id="glucose-units-dropdown">
+                    <option>mg/dL</option>
+                    <option>mmol/L</option>
+                </select>
+            </li>
+            <li>
+                Insulin dosage: 
+                <input id="insulin-input">
+                <select id="insulin-units-dropdown">
+                    <option value="IUs">units</option>
+                    <option value="milligrams">milligrams (mg)</option>
+                    <option value="micrograms">micrograms (µg)</option>
+                </select>
+            </li>
+            <li>
+                Food: 
+                <ul id="food-input-list">
+                    <li >
+                        <input class="food-input"><input type="button" value="Remove item"><br>
+                    </li>
+                    <li>
+                        <input type="button" value="Add item">
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Physical Activity: 
+                <select id="exercise-rigor-dropdown">
+                    <option value="blank"></option>
+                    <option value="none">None</option>
+                    <option value="light">Light</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="heavy">Heavy</option>
+                </select>
+            </li>
+            <li>
+                Weight:
+                <input placeholder="">
+                <select id="weight-units-dropdown">
+                    <option>pounds</option>
+                    <option>kilograms</option>
+                </select>
+            </li>
+            <li>
+                Blood pressure:
+                <ul>
+                    <input placeholder="Systolic (high number)">
+                    <input placeholder="Diastolic (low number)">
+                </ul>
+            </li>
+            <li>
+                <input id="submit-button" type="submit">
+            </li>
+        </ul>
+    </div>
+</body>
