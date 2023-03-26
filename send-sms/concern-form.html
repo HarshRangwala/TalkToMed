@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Non-Emergency Medical Concern</title>
+    <style>
+        textarea {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+        body {text-align: center;}
+        .left-align {text-align: left;}
+    </style>
+    <script type="text/javascript">
+        function submitted() {
+            console.log(document.getElementById('name').getAttribute('value').toString())
+            console.log("anything")
+        }
+    </script>
+</head>
+<body>
+    <form action="/concern-form" method="POST">
+        <label class="left-align" for="user">Logged in as:</label><input name="user" id="user"></p>
+        <h3>Enter your concern below:</h3>
+        <textarea rows = 10 cols = 40></textarea>
+        <br><br>
+        <input id="submit-button" type="submit" value="Submit concern">
+    </form>
+    
+</body>
