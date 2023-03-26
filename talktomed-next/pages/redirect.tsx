@@ -19,7 +19,7 @@ const Redirect: NextPage = () => {
         if (providerLoading || loading) return;
         console.log(user)
         if (!user) router.push('/login')
-        if (!!isProvider) {
+        else if (!!isProvider) {
             router.push('/provider')
         } else {
             router.push('/patient')

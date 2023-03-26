@@ -20,8 +20,8 @@ const ProviderDashboard: NextPage = () => {
     const [userData, dataLoading, dataError] = useDocumentData(user?.uid ? doc(db, `/UserClassification/${user?.uid}`) : undefined);
     const [patients, patientsLoading, patientsError] = useCollection(collection(db, 'Patients'));
 
-    const logout = () => {
-        signOut(auth)
+    const logout = async () => {
+        await signOut(auth)
         router.push('/redirect')
     }
 
@@ -39,7 +39,7 @@ const ProviderDashboard: NextPage = () => {
                     <th>DOB</th>
                     <th>Actions</th>
                 </thead>
-                {patients?.docs.map((doc) => {
+                {patients?.size && patients?.docs.map((doc) => {
                     const data = doc.data()
                     return (
                         <tr key={data.id}>
