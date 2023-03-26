@@ -13,20 +13,18 @@ import { auth, db } from '../script/firebaseConfig'
 const Redirect: NextPage = () => {
     const router = useRouter();
     const [user, loading, error] = useAuthState(auth);
-    const [userData, dataLoading, dataError] = useDocumentData(user?.uid ? doc(db, `/UserClassification/${user?.uid}`) : undefined)
+    const [isProvider, providerLoading, providerError] = useDocumentData(user?.uid ? doc(db, `/Provider/${user?.uid}`) : undefined)
 
 
     useEffect(() => {
-        if (!dataLoading || loading) return;
-        if (!user) {
-            router.push('/login')
-        }
-        if (userData?.type == 'provider') {
+        if (providerLoading || loading) return;
+        if (!user) router.push('/login')
+        if (!!isProvider) {
             router.push('/provider')
         } else {
             router.push('/patient')
         }
-    }, [user, userData]);
+    }, [user, isProvider]);
 
     return (
         <main css={[centeredPage, {
@@ -38,3 +36,4 @@ const Redirect: NextPage = () => {
 }
 
 export default Redirect
+ 

@@ -5,11 +5,12 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     children?: ReactNode,
     fullWidth?: boolean,
     loading?: boolean,
-    error?: string
+    error?: string,
+    lightVariant?: boolean
 }
 
 const Button: FC<ButtonProps> = props => {
-    let { children, fullWidth, loading, error, ...rest } = props;
+    let { children, fullWidth, loading, error, lightVariant, ...rest } = props;
     return (
         <>
             <button css={[
@@ -24,7 +25,7 @@ const Button: FC<ButtonProps> = props => {
                     fontSize: '1em',
                     padding: '0.5rem 1rem'
                 },
-                loading && {
+                (loading || lightVariant) && {
                     backgroundColor: colors.background_dark,
                     text: colors.grey
                 },

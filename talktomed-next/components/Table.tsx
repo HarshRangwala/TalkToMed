@@ -11,10 +11,16 @@ export type TableProps = {
 const Table: FC<TableProps> = props => {
     const { children } = props;
     return (
-        <table css={{
+        <table css={[{
             backgroundColor: colors.background_dark,
-            borderRadius: '1rem'
-        }}>
+            borderRadius: '1rem',
+            tableLayout: 'fixed',
+            width: '100%',
+            textAlign: 'center',
+            '& tr': {
+                padding: '0.5em 0'
+            }
+        }]}>
             {children}
         </table>
     )

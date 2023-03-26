@@ -14,20 +14,24 @@ Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`
 });
 
 export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-    fullWidth?: boolean
+    fullWidth?: boolean,
+    error?: boolean
 }
 
 const TextField: FC<TextFieldProps> = props => {
-    const {fullWidth, placeholder} = props;
+    const {fullWidth, error, ...rest} = props;
     return (
-        <input css={[{
+        <input css={[
+          {
             alignSelf: fullWidth ? 'stretch' : undefined,
             border: `3px solid ${colors.background_dark}`,
             backgroundColor: colors.background,
             fontSize: '1em',
             padding: '0.5rem 1rem',
-        }, rounded]}
-         {...props} />
+        }, error && {
+          borderColor: colors.main
+        },rounded]}
+         {...rest} />
     )
 }
 
