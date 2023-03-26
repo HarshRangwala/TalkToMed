@@ -21,4 +21,8 @@ function send(destinationPhone, sms) {
     .then(message => console.log(message.sid));
 }
 
+function messageDoctor(patient) {
+    send("+15403310778", `TalkToMed: ${patient} has sent a new concern. Log in to view the full message and reply: https://talktomed.com/login`)
+}
+
 module.exports = {initialize, send}
