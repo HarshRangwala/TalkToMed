@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { Component, FC, ReactNode } from "react";
 import { colors, rounded } from "./styles";
 
 export type ButtonProps = {
@@ -7,7 +7,7 @@ export type ButtonProps = {
 }
 
 const Button: FC<ButtonProps> = props => {
-    const {children, fullWidth} = props;
+    let {children, fullWidth, ...rest} = props;
     return (
         <button css={[{
             alignSelf: fullWidth ? 'stretch' : undefined,
@@ -19,7 +19,7 @@ const Button: FC<ButtonProps> = props => {
             border: 'none',
             fontSize: '1em',
             padding: '0.5rem 1rem'
-        }, rounded]} {...props}>
+        }, rounded]} {...rest}>
             {children}
         </button>
     )

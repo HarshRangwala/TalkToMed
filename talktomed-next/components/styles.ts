@@ -15,6 +15,11 @@ export const center = css({
     alignItems: 'center'
 });
 
+export const centeredPage = css([center, {
+    paddingTop: '2rem',
+    width: 'min(20rem, 80vh)'
+}]);
+
 export const main = css({
     minHeight: '100vh',
     flex: 1,
