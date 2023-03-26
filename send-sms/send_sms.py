@@ -7,8 +7,8 @@ sender_number = "+18663484479" #Number to send from
 cmd_usage = "\nUsage: python3 send_sms.py <phone number> <message>\n(use quotes around message)"
 
 account_sid = 'AC41aceb8c791063befc0bf1c71674853c'
-api_key = 'SK5d51d5d15ec1e9668887a1aa5896dd1b'
 api_key_secret_file = fileinput.FileInput("key.txt")
+api_key = api_key_secret_file.readline()
 api_key_secret = api_key_secret_file.readline()
 api_key_secret_file.close()
 
