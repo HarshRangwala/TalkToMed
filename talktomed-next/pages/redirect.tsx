@@ -17,7 +17,10 @@ const Redirect: NextPage = () => {
 
 
     useEffect(() => {
-        if (!user || !userData) return;
+        if (!dataLoading || loading) return;
+        if (!user) {
+            router.push('/login')
+        }
         if (userData?.type == 'provider') {
             router.push('/provider')
         } else {

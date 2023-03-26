@@ -1,15 +1,13 @@
 import type { NextPage } from 'next'
-import { ChangeEventHandler, Dispatch, MouseEventHandler, SetStateAction, useEffect, useState } from 'react'
+import { ChangeEventHandler, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Button from '../components/Button'
 import Header from '../components/Header'
 import { centeredPage } from '../components/styles'
 import TextField from '../components/TextField'
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
-import { useDocumentData } from 'react-firebase-hooks/firestore'
-import { auth, db } from '../script/firebaseConfig'
-import { AuthError, UserCredential  } from 'firebase/auth'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { auth } from '../script/firebaseConfig'
+import { AuthError  } from 'firebase/auth'
 import { useRouter } from 'next/router'
-import { doc } from 'firebase/firestore'
 
 const parseError = (err: AuthError | undefined) => {
   if (!err) return undefined;

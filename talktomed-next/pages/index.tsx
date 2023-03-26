@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       gap: '0.25rem'
     }]}>
       <Header>TalkTo<span css={{ color: colors.main }}>Med</span></Header>
-      <Link passHref href='/login'>
+      <Link passHref href='/redirect'>
         <Button fullWidth>Patient and Provider Login</Button>
       </Link>
     </main>
