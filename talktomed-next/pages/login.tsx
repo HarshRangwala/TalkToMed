@@ -4,7 +4,7 @@ import Button from '../components/Button'
 import Header from '../components/Header'
 import { centeredPage } from '../components/styles'
 import TextField from '../components/TextField'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { auth, db } from '../script/firebaseConfig'
 import { AuthError, UserCredential  } from 'firebase/auth'
@@ -18,23 +18,19 @@ const parseError = (err: AuthError | undefined) => {
 }
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [
     signInWithEmailAndPassword,
     user,
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
-  const [userData, dataLoading, dataError] = useDocumentData(user?.user?.uid ? doc(db, `/UserClassification/${user?.user?.uid}`) : undefined)
-  const router = useRouter();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    if (!userData) return;
-    if (userData?.type == 'provider') {
-      router.push('/provider')
-    } else {
-      router.push('/patient')
+    if (user) {
+      router.push('/redirect')
     }
   }, [user])
 
@@ -52,7 +48,7 @@ const Home: NextPage = () => {
       <Header>Log In</Header>
       <TextField onChange={set(setEmail)} fullWidth type='email' placeholder='Email Address' />
       <TextField onChange={set(setPassword)} fullWidth type='password' placeholder='Password' />
-      <Button loading={loading || dataLoading} error={parseError(error)} onClick={signIn} fullWidth>Log In</Button>
+      <Button loading={loading} error={parseError(error)} onClick={signIn} fullWidth>Log In</Button>
     </main>
   )
 }

@@ -14,9 +14,8 @@ const Home: NextPage = () => {
     }]}>
       <Header>TalkTo<span css={{ color: colors.main }}>Med</span></Header>
       <Link passHref href='/login'>
-        <Button fullWidth>Patient Login</Button>
+        <Button fullWidth>Patient and Provider Login</Button>
       </Link>
-      <Button fullWidth>Provider Login</Button>
     </main>
   )
 }
