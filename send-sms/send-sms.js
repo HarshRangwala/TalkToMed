@@ -2,7 +2,7 @@ const fs = require('fs');
 const fromNumber = "+18663484479"
 var client;
 function initialize() {
-    const keyFile = fs.readFileSync('../key.json');
+    const keyFile = fs.readFileSync('/etc/secrets/key.json');
     const json = JSON.parse(String(keyFile));
 
     // Set the environment variables. See http://twil.io/secure
