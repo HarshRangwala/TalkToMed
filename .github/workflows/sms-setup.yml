@@ -30,10 +30,6 @@ jobs:
         env:
             TWILIO_API_KEY_SECRET: ${{ secrets.TWILIO_API_KEY_SECRET }}
         run: echo "$TWILIO_API_KEY_SECRET" > ~/work/TalkToMed/TalkToMed/send-sms/key.txt
-      
-      # Install latest version of pip
-      - name: Install pip
-        run: pip3 --version
         
       # Install twilio python package
       - name: Install twilio
