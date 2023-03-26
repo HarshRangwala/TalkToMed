@@ -10,18 +10,26 @@ import { centeredPage } from '../../components/styles'
 import Table from '../../components/Table'
 import { auth, db } from '../../script/firebaseConfig'
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { signOut } from 'firebase/auth'
+import { useRouter } from 'next/router'
 
 
 const ProviderDashboard: NextPage = () => {
+    const router = useRouter();
     const [user, loading, error] = useAuthState(auth);
     const [userData, dataLoading, dataError] = useDocumentData(user?.uid ? doc(db, `/UserClassification/${user?.uid}`) : undefined);
     const [patients, patientsLoading, patientsError] = useCollection(collection(db, 'Patients'));
+
+    const logout = () => {
+        signOut(auth)
+        router.push('/redirect')
+    }
 
     return (
         <main css={[centeredPage, {
             gap: '0.25rem'
         }]}>
-            <Header>Welcome, {userData?.["Doctor's Name"] || 'Provider'}</Header>
+            <Header onClose={logout}>Welcome, {userData?.["Doctor's Name"] || 'Provider'}</Header>
             <Link passHref href='/provider/enroll'>
                 <Button fullWidth>Enroll New Patient</Button>
             </Link>

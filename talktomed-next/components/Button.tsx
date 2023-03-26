@@ -30,7 +30,7 @@ const Button: FC<ButtonProps> = props => {
                     text: colors.grey
                 },
                 rounded
-            ]} {...rest}>
+            ]} disabled={loading} {...rest}>
                 {children}
             </button>
             {error && <p css={{color: 'red'}}>{error}</p>}

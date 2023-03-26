@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { AuthError, createUserWithEmailAndPassword, User } from 'firebase/auth'
@@ -62,6 +62,7 @@ const Home: NextPage = () => {
     const [userData, dataLoading, dataError] = useDocumentData(user?.uid ? doc(db, `/Patients/${user?.uid}`) : undefined)
     const [formData, setFormData] = useState<EnrollFormData>({});
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [enrollState, setEnrollState] = useState<Promise<any>>();
 
     useEffect(() => {
@@ -79,7 +80,7 @@ const Home: NextPage = () => {
         }]}>
             <Header closeToPath='/provider'>Enroll Patient</Header>
             <TextField onChange={set("Patient's Name")} fullWidth placeholder='Full Name' />
-            <TextField error={enrollError?.error == 'Email'} onChange={(e) => setEmail(e.target.value)} fullWidth type="Email" placeholder='Email' />
+            <TextField error={enrollError?.error == 'Email'} onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} fullWidth type="Email" placeholder='Email' />
             <TextField onChange={set('Cell number')} fullWidth placeholder='Phone Number' />
             <TextField onChange={set('Height')} fullWidth placeholder='Height' />
             <Button error={enrollError?.message as string} loading={loading || dataLoading || enrollLoading} onClick={user ? (() => enroll(formData, email, user)) : undefined} fullWidth>Log In</Button>

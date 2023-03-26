@@ -6,11 +6,12 @@ import { colors } from "./styles";
 
 export type HeaderProps = {
     children?: ReactNode,
-    closeToPath?: string
+    closeToPath?: string,
+    onClose?: () => void
 }
 
 const Header: FC<HeaderProps> = props => {
-    const { children, closeToPath } = props;
+    const { children, closeToPath, onClose } = props;
     return (
         <h1 css={[{
             display: 'flex',
@@ -18,7 +19,7 @@ const Header: FC<HeaderProps> = props => {
             alignSelf: 'stretch',
             alignItems: 'center',
             justifyContent: 'center'
-        }, closeToPath && {
+        }, (closeToPath || onClose) && {
             justifyContent: 'space-between'
         }]}>
             {children}
@@ -28,6 +29,12 @@ const Header: FC<HeaderProps> = props => {
                 color: colors.grey
             } }} />
             </Link>}
+            {onClose && <div onClick={onClose}>
+                <FontAwesomeIcon icon={faTimes} css={{ marginLeft: 'auto', 
+            '&:hover': {
+                color: colors.grey
+            } }} />
+            </div>}
         </h1>
     )
 }

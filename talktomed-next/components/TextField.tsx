@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { FC, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
+import { FC, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import { colors, rounded } from "./styles";
 
 const globalStyles = css({
@@ -13,26 +13,33 @@ Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`
   }
 });
 
-export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-    fullWidth?: boolean,
-    error?: boolean
-}
+// export type TextFieldProps =  any {
+//   fullWidth?: boolean,
+//   error?: boolean,
+//   textArea?: boolean,
 
-const TextField: FC<TextFieldProps> = props => {
-    const {fullWidth, error, ...rest} = props;
-    return (
-        <input css={[
-          {
-            alignSelf: fullWidth ? 'stretch' : undefined,
-            border: `3px solid ${colors.background_dark}`,
-            backgroundColor: colors.background,
-            fontSize: '1em',
-            padding: '0.5rem 1rem',
-        }, error && {
-          borderColor: colors.main
-        },rounded]}
-         {...rest} />
-    )
+// }
+
+const TextField: FC<any> = props => {
+  const { textArea, fullWidth, error, ...rest } = props;
+  const propsToPass = {
+    css: css([
+      {
+        alignSelf: fullWidth ? 'stretch' : undefined,
+        border: `3px solid ${colors.background_dark}`,
+        backgroundColor: colors.background,
+        fontSize: '1em',
+        padding: '0.5rem 1rem',
+      }, error && {
+        borderColor: colors.main
+      }, rounded]),
+    ...rest
+  }
+  return textArea ? (
+    <textarea {...propsToPass}></textarea>
+  ): (
+    <input {...propsToPass} />
+  )
 }
 
 export default TextField

@@ -1,17 +1,14 @@
 import type { NextPage } from 'next'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
-import { AuthError, createUserWithEmailAndPassword, User } from 'firebase/auth'
 import { useRouter } from 'next/router'
-import { collection, doc, setDoc } from 'firebase/firestore'
-import Button from '../../components/Button'
-import Header from '../../components/Header'
-import { centeredPage } from '../../components/styles'
-import TextField from '../../components/TextField'
-import { auth, db } from '../../script/firebaseConfig'
-import axios, { AxiosError, AxiosResponse } from 'axios'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { doc } from 'firebase/firestore'
+import Button from '../../../components/Button'
+import Header from '../../../components/Header'
+import { centeredPage } from '../../../components/styles'
+import { auth, db } from '../../../script/firebaseConfig'
+import Link from 'next/link'
 
 const Home: NextPage = () => {
     const router = useRouter();
@@ -33,7 +30,9 @@ const Home: NextPage = () => {
             gap: '0.25rem'
         }]}>
             <Header closeToPath='/provider'>{patientData ? patientData.Name : "Loading..."}</Header>
-            <Button fullWidth>Send Message</Button>
+            <Link href={`/provider/${patient}/message`}>
+            <Button loading={patientLoading} fullWidth>Send Message</Button>
+            </Link>
         </main>
     )
 }
