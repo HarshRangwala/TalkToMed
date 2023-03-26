@@ -1,6 +1,6 @@
 from twilio.rest import Client
+from http.server import HTTPServer
 import twilio.base.exceptions
-import sys
 import fileinput
 
 sender_number = "+18663484479" #Number to send from
@@ -9,6 +9,7 @@ cmd_usage = "\nUsage: python3 send_sms.py <phone number> <message>\n(use quotes 
 account_sid = 'AC41aceb8c791063befc0bf1c71674853c'
 api_key = 'SK5d51d5d15ec1e9668887a1aa5896dd1b'
 api_key_secret_file = fileinput.FileInput("key.txt")
+
 api_key_secret = api_key_secret_file.readline()
 api_key_secret_file.close()
 
@@ -31,14 +32,12 @@ def sendSMS(phoneNumber, message):
     else:
         return True
 
+def BaseHTTPRequestHandler(request, client_address, server):
+    print()
 
-# When ran from command line:
-args = sys.argv
-if len(args) != 3:
-    print("Invalid number of arguments" + cmd_usage)
-else:
-    if sendSMS(args[1], args[2]):
-        print("OK")
-    else:
-        print("Error: SMS message may not have sent")
+def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
+    server_address = ('SMSservice', 8000)
+    httpd = server_class(server_address, handler_class)
+    httpd.serve_forever()
+
 
