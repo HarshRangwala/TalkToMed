@@ -30,4 +30,12 @@ jobs:
         env:
             TWILIO_API_KEY_SECRET: ${{ secrets.TWILIO_API_KEY_SECRET }}
         run: echo "$TWILIO_API_KEY_SECRET" > ~/work/TalkToMed/TalkToMed/send-sms/key.txt
+      
+      # Install latest version of pip
+      - name: Install pip
+        run: sudo apt-get -y install python3-pip python-dev
+        
+      # Install twilio python package
+      - name: Install twilio
+        run: pip3 install twilio
         
