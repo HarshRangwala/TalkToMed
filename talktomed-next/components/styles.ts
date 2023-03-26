@@ -5,7 +5,8 @@ export const colors = {
     main_dark: '#B02E0C',
     background: '#FEFDFF', /*white*/
     background_dark: '#C1BFB5',
-    accent: '#8EB1C7' /*blue*/
+    accent: '#8EB1C7' /*blue*/,
+    grey: '#888'
 }
 
 export const center = css({

@@ -1,27 +1,39 @@
-import { Component, FC, ReactNode } from "react";
+import { ButtonHTMLAttributes, Component, FC, ReactNode } from "react";
 import { colors, rounded } from "./styles";
 
-export type ButtonProps = {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     children?: ReactNode,
-    fullWidth?: boolean
+    fullWidth?: boolean,
+    loading?: boolean,
+    error?: string
 }
 
 const Button: FC<ButtonProps> = props => {
-    let {children, fullWidth, ...rest} = props;
+    let { children, fullWidth, loading, error, ...rest } = props;
     return (
-        <button css={[{
-            alignSelf: fullWidth ? 'stretch' : undefined,
-            backgroundColor: colors.main,
-            color: colors.background,
-            '&:hover,&:active': {
-                backgroundColor: colors.main_dark
-            },
-            border: 'none',
-            fontSize: '1em',
-            padding: '0.5rem 1rem'
-        }, rounded]} {...rest}>
-            {children}
-        </button>
+        <>
+            <button css={[
+                fullWidth && { alignSelf: "stretch" },
+                {
+                    backgroundColor: colors.main,
+                    color: colors.background,
+                    '&:hover,&:active': {
+                        backgroundColor: colors.main_dark
+                    },
+                    border: 'none',
+                    fontSize: '1em',
+                    padding: '0.5rem 1rem'
+                },
+                loading && {
+                    backgroundColor: colors.background_dark,
+                    text: colors.grey
+                },
+                rounded
+            ]} {...rest}>
+                {children}
+            </button>
+            {error && <p css={{color: 'red'}}>{error}</p>}
+        </>
     )
 }
 
